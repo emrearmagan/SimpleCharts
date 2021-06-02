@@ -8,11 +8,13 @@
 import UIKit
 
 public protocol BarLayerDelegate: AnyObject {
+    func didSelectLayer(bar: Bar)
+    
+    // Called when the animation for the Layer has been started
     func animationDidStart(bar: Bar)
     
+    // Called when the animation for the Layer has been finished/stopped
     func animationDidStop(bar: Bar)
-    
-    func didSelectLayer(bar: Bar)
 }
 
 open class BarLayer: CALayer {
@@ -41,8 +43,8 @@ open class BarLayer: CALayer {
     public var cornerRounding: CGFloat = 5
     
     /// Data of the bar
-    var barEntry: BarLayerData?
-    public weak var barLayerDelegate: BarLayerDelegate?
+    public var barEntry: BarLayerData?
+    open weak var barLayerDelegate: BarLayerDelegate?
     
     //MARK: Private Properties
     
@@ -52,7 +54,7 @@ open class BarLayer: CALayer {
     /// Custom animation key for animating the bounds of the bar
     @NSManaged var boundsManaged: CGRect
     
-    /// Disbales the animation
+    /// A flag indicated whether or not to animate the layer
     private var disabledAnimation = false
     
     //MARK: init
