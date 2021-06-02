@@ -86,7 +86,7 @@ class LegendLayer: CALayer {
     public override init() {
         super.init()
         contentsScale = UIScreen.main.scale
-        backgroundColor = UIColor.systemRed.cgColor
+        //backgroundColor = UIColor.systemRed.cgColor
     }
     
     required init?(coder: NSCoder) {
