@@ -12,12 +12,20 @@
 		D0F9942E2661694B00890554 /* SimpleCharts.h in Headers */ = {isa = PBXBuildFile; fileRef = D0F994202661694B00890554 /* SimpleCharts.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D0F9943E26616BB100890554 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F9943D26616BB100890554 /* AppDelegate.swift */; };
 		D0F9944026616BB100890554 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F9943F26616BB100890554 /* SceneDelegate.swift */; };
-		D0F9944226616BB100890554 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F9944126616BB100890554 /* ViewController.swift */; };
 		D0F9944526616BB100890554 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0F9944326616BB100890554 /* Main.storyboard */; };
 		D0F9944726616BB300890554 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0F9944626616BB300890554 /* Assets.xcassets */; };
 		D0F9944A26616BB300890554 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0F9944826616BB300890554 /* LaunchScreen.storyboard */; };
-		D0F9946C26616C5100890554 /* SimpleCharts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0F9941D2661694B00890554 /* SimpleCharts.framework */; };
-		D0F9946D26616C5100890554 /* SimpleCharts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D0F9941D2661694B00890554 /* SimpleCharts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D0F9947826617FCD00890554 /* BarChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F9947726617FCD00890554 /* BarChartViewController.swift */; };
+		D0F9948826624CC600890554 /* BarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F9948726624CC600890554 /* BarChartView.swift */; };
+		D0F9948B266257D900890554 /* BarEntryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F9948A266257D900890554 /* BarEntryModel.swift */; };
+		D0F9948D266268CC00890554 /* BarLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F9948C266268CC00890554 /* BarLayer.swift */; };
+		D0F9948F2663CB7F00890554 /* BarLayerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F9948E2663CB7F00890554 /* BarLayerData.swift */; };
+		D0F994912663D0F900890554 /* Bar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F994902663D0F900890554 /* Bar.swift */; };
+		D0F994972665E88000890554 /* LegendLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F994962665E88000890554 /* LegendLayer.swift */; };
+		D0F9949A2666006600890554 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F994992666006600890554 /* String.swift */; };
+		D0F9949C26677F0B00890554 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F9949B26677F0B00890554 /* Helper.swift */; };
+		D0F994A2266784CA00890554 /* SimpleCharts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0F9941D2661694B00890554 /* SimpleCharts.framework */; };
+		D0F994A3266784CA00890554 /* SimpleCharts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D0F9941D2661694B00890554 /* SimpleCharts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,7 +36,14 @@
 			remoteGlobalIDString = D0F9941C2661694B00890554;
 			remoteInfo = SimpleCharts;
 		};
-		D0F9946E26616C5100890554 /* PBXContainerItemProxy */ = {
+		D0F994A0266784C200890554 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D0F994142661694B00890554 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D0F9941C2661694B00890554;
+			remoteInfo = SimpleCharts;
+		};
+		D0F994A4266784CA00890554 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D0F994142661694B00890554 /* Project object */;
 			proxyType = 1;
@@ -38,13 +53,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		D0F9947026616C5100890554 /* Embed Frameworks */ = {
+		D0F994A6266784CA00890554 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				D0F9946D26616C5100890554 /* SimpleCharts.framework in Embed Frameworks */,
+				D0F994A3266784CA00890554 /* SimpleCharts.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -61,11 +76,19 @@
 		D0F9943B26616BB100890554 /* SimpleChartsDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleChartsDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0F9943D26616BB100890554 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D0F9943F26616BB100890554 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		D0F9944126616BB100890554 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		D0F9944426616BB100890554 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D0F9944626616BB300890554 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D0F9944926616BB300890554 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D0F9944B26616BB300890554 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D0F9947726617FCD00890554 /* BarChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChartViewController.swift; sourceTree = "<group>"; };
+		D0F9948726624CC600890554 /* BarChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChartView.swift; sourceTree = "<group>"; };
+		D0F9948A266257D900890554 /* BarEntryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarEntryModel.swift; sourceTree = "<group>"; };
+		D0F9948C266268CC00890554 /* BarLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarLayer.swift; sourceTree = "<group>"; };
+		D0F9948E2663CB7F00890554 /* BarLayerData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarLayerData.swift; sourceTree = "<group>"; };
+		D0F994902663D0F900890554 /* Bar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bar.swift; sourceTree = "<group>"; };
+		D0F994962665E88000890554 /* LegendLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegendLayer.swift; sourceTree = "<group>"; };
+		D0F994992666006600890554 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		D0F9949B26677F0B00890554 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,7 +111,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D0F9946C26616C5100890554 /* SimpleCharts.framework in Frameworks */,
+				D0F994A2266784CA00890554 /* SimpleCharts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -119,8 +142,10 @@
 		D0F9941F2661694B00890554 /* SimpleCharts */ = {
 			isa = PBXGroup;
 			children = (
-				D0F994202661694B00890554 /* SimpleCharts.h */,
-				D0F994212661694B00890554 /* Info.plist */,
+				D0F9949E26677FED00890554 /* Charts */,
+				D0F9949326649CD600890554 /* Extension */,
+				D0F9949D26677FD600890554 /* SupportFiles */,
+				D0F9949B26677F0B00890554 /* Helper.swift */,
 			);
 			path = SimpleCharts;
 			sourceTree = "<group>";
@@ -139,11 +164,11 @@
 			children = (
 				D0F9943D26616BB100890554 /* AppDelegate.swift */,
 				D0F9943F26616BB100890554 /* SceneDelegate.swift */,
-				D0F9944126616BB100890554 /* ViewController.swift */,
 				D0F9944326616BB100890554 /* Main.storyboard */,
 				D0F9944626616BB300890554 /* Assets.xcassets */,
 				D0F9944826616BB300890554 /* LaunchScreen.storyboard */,
 				D0F9944B26616BB300890554 /* Info.plist */,
+				D0F9947726617FCD00890554 /* BarChartViewController.swift */,
 			);
 			path = SimpleChartsDemo;
 			sourceTree = "<group>";
@@ -153,6 +178,60 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D0F99489266257BF00890554 /* BarChart */ = {
+			isa = PBXGroup;
+			children = (
+				D0F994982665E89000890554 /* Layer */,
+				D0F9948E2663CB7F00890554 /* BarLayerData.swift */,
+				D0F9948726624CC600890554 /* BarChartView.swift */,
+				D0F994902663D0F900890554 /* Bar.swift */,
+			);
+			path = BarChart;
+			sourceTree = "<group>";
+		};
+		D0F9949226640BDC00890554 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D0F9948A266257D900890554 /* BarEntryModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		D0F9949326649CD600890554 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				D0F994992666006600890554 /* String.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		D0F994982665E89000890554 /* Layer */ = {
+			isa = PBXGroup;
+			children = (
+				D0F9948C266268CC00890554 /* BarLayer.swift */,
+				D0F994962665E88000890554 /* LegendLayer.swift */,
+			);
+			path = Layer;
+			sourceTree = "<group>";
+		};
+		D0F9949D26677FD600890554 /* SupportFiles */ = {
+			isa = PBXGroup;
+			children = (
+				D0F994202661694B00890554 /* SimpleCharts.h */,
+				D0F994212661694B00890554 /* Info.plist */,
+			);
+			path = SupportFiles;
+			sourceTree = "<group>";
+		};
+		D0F9949E26677FED00890554 /* Charts */ = {
+			isa = PBXGroup;
+			children = (
+				D0F9949226640BDC00890554 /* Models */,
+				D0F99489266257BF00890554 /* BarChart */,
+			);
+			path = Charts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -212,12 +291,13 @@
 				D0F9943726616BB100890554 /* Sources */,
 				D0F9943826616BB100890554 /* Frameworks */,
 				D0F9943926616BB100890554 /* Resources */,
-				D0F9947026616C5100890554 /* Embed Frameworks */,
+				D0F994A6266784CA00890554 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				D0F9946F26616C5100890554 /* PBXTargetDependency */,
+				D0F994A1266784C200890554 /* PBXTargetDependency */,
+				D0F994A5266784CA00890554 /* PBXTargetDependency */,
 			);
 			name = SimpleChartsDemo;
 			productName = SimpleChartsDemo;
@@ -297,6 +377,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0F9948B266257D900890554 /* BarEntryModel.swift in Sources */,
+				D0F9949A2666006600890554 /* String.swift in Sources */,
+				D0F994972665E88000890554 /* LegendLayer.swift in Sources */,
+				D0F994912663D0F900890554 /* Bar.swift in Sources */,
+				D0F9948D266268CC00890554 /* BarLayer.swift in Sources */,
+				D0F9949C26677F0B00890554 /* Helper.swift in Sources */,
+				D0F9948826624CC600890554 /* BarChartView.swift in Sources */,
+				D0F9948F2663CB7F00890554 /* BarLayerData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -312,7 +400,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D0F9944226616BB100890554 /* ViewController.swift in Sources */,
+				D0F9947826617FCD00890554 /* BarChartViewController.swift in Sources */,
 				D0F9943E26616BB100890554 /* AppDelegate.swift in Sources */,
 				D0F9944026616BB100890554 /* SceneDelegate.swift in Sources */,
 			);
@@ -326,10 +414,15 @@
 			target = D0F9941C2661694B00890554 /* SimpleCharts */;
 			targetProxy = D0F994282661694B00890554 /* PBXContainerItemProxy */;
 		};
-		D0F9946F26616C5100890554 /* PBXTargetDependency */ = {
+		D0F994A1266784C200890554 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = D0F9941C2661694B00890554 /* SimpleCharts */;
-			targetProxy = D0F9946E26616C5100890554 /* PBXContainerItemProxy */;
+			targetProxy = D0F994A0266784C200890554 /* PBXContainerItemProxy */;
+		};
+		D0F994A5266784CA00890554 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D0F9941C2661694B00890554 /* SimpleCharts */;
+			targetProxy = D0F994A4266784CA00890554 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -485,7 +578,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = SimpleCharts/Info.plist;
+				INFOPLIST_FILE = SimpleCharts/SupportFiles/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -513,7 +606,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = SimpleCharts/Info.plist;
+				INFOPLIST_FILE = SimpleCharts/SupportFiles/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -533,6 +626,7 @@
 		D0F994352661694B00890554 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 427UZ9VVG6;
 				INFOPLIST_FILE = SimpleChartsTests/Info.plist;
@@ -551,6 +645,7 @@
 		D0F994362661694B00890554 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 427UZ9VVG6;
 				INFOPLIST_FILE = SimpleChartsTests/Info.plist;

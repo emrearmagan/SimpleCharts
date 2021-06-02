@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="eqr-L9-bCs">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -9,25 +9,150 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--SimpleCharts-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="SimpleChartsDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DGT-64-RLN">
-                                <rect key="frame" x="86" y="169" width="242" height="42"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" systemColor="systemBlueColor"/>
-                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dqj-oz-wB2">
+                                <rect key="frame" x="50" y="190" width="314" height="50"/>
+                                <color key="backgroundColor" red="0.2901960784" green="0.54117647059999996" blue="0.86274509799999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="UaI-bm-7cp"/>
+                                </constraints>
+                                <state key="normal" title="BarChart">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <segue destination="eqr-L9-bCs" kind="show" id="QTf-3O-xhh"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="dqj-oz-wB2" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="50" id="3XG-mK-9wL"/>
+                            <constraint firstItem="dqj-oz-wB2" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="OIZ-0j-ifc"/>
+                            <constraint firstItem="dqj-oz-wB2" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="50" id="hkR-zi-fvq"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="SimpleCharts" id="GFg-Wk-354"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="928.98550724637687" y="93.75"/>
+        </scene>
+        <!--BarChart-->
+        <scene sceneID="Ttw-mM-tWz">
+            <objects>
+                <viewController modalPresentationStyle="fullScreen" id="eqr-L9-bCs" customClass="BarChartViewController" customModule="SimpleChartsDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="XBL-OJ-UCE">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="b40-au-35T">
+                                <rect key="frame" x="50" y="410" width="314" height="32"/>
+                                <segments>
+                                    <segment title="4"/>
+                                    <segment title="8"/>
+                                    <segment title="12"/>
+                                    <segment title="16"/>
+                                    <segment title="18"/>
+                                </segments>
+                                <connections>
+                                    <action selector="segmetSelected:" destination="eqr-L9-bCs" eventType="valueChanged" id="ke7-3h-P2W"/>
+                                </connections>
+                            </segmentedControl>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h7X-CB-Rd6" customClass="BarChartView" customModule="SimpleCharts">
+                                <rect key="frame" x="20" y="140" width="374" height="250"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="250" id="8C7-Bc-2z3"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kVd-8j-pFN" customClass="BarChartView" customModule="SimpleCharts">
+                                <rect key="frame" x="132" y="491" width="150" height="150"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="jAf-eL-sAs"/>
+                                    <constraint firstAttribute="width" constant="150" id="ucm-1w-rWE"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wTS-vT-K8v" customClass="BarChartView" customModule="SimpleCharts">
+                                <rect key="frame" x="50" y="691" width="314" height="130"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="130" id="cpT-9n-ND8"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="xTS-Zb-Jl7"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="wTS-vT-K8v" firstAttribute="top" secondItem="kVd-8j-pFN" secondAttribute="bottom" constant="50" id="2R2-NS-3Ft"/>
+                            <constraint firstItem="wTS-vT-K8v" firstAttribute="leading" secondItem="xTS-Zb-Jl7" secondAttribute="leading" constant="50" id="3vV-YO-eYh"/>
+                            <constraint firstItem="b40-au-35T" firstAttribute="top" secondItem="h7X-CB-Rd6" secondAttribute="bottom" constant="20" id="AtX-4H-Twd"/>
+                            <constraint firstItem="xTS-Zb-Jl7" firstAttribute="trailing" secondItem="wTS-vT-K8v" secondAttribute="trailing" constant="50" id="Fp0-8b-ZP4"/>
+                            <constraint firstItem="kVd-8j-pFN" firstAttribute="centerX" secondItem="b40-au-35T" secondAttribute="centerX" id="IEd-qN-eJF"/>
+                            <constraint firstItem="h7X-CB-Rd6" firstAttribute="top" secondItem="xTS-Zb-Jl7" secondAttribute="top" id="RBL-Og-ww5"/>
+                            <constraint firstItem="xTS-Zb-Jl7" firstAttribute="trailing" secondItem="h7X-CB-Rd6" secondAttribute="trailing" constant="20" id="Y15-CV-yzY"/>
+                            <constraint firstItem="b40-au-35T" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="xTS-Zb-Jl7" secondAttribute="leading" constant="50" id="eZk-TT-ncO"/>
+                            <constraint firstItem="xTS-Zb-Jl7" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="b40-au-35T" secondAttribute="trailing" constant="50" id="l7L-yI-zfx"/>
+                            <constraint firstItem="h7X-CB-Rd6" firstAttribute="leading" secondItem="xTS-Zb-Jl7" secondAttribute="leading" constant="20" id="wGA-Z7-fch"/>
+                            <constraint firstItem="b40-au-35T" firstAttribute="centerX" secondItem="h7X-CB-Rd6" secondAttribute="centerX" id="wYL-Al-JlR"/>
+                            <constraint firstItem="kVd-8j-pFN" firstAttribute="top" secondItem="b40-au-35T" secondAttribute="bottom" constant="50" id="yJV-YV-04g"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="BarChart" largeTitleDisplayMode="always" id="Nj2-d7-aTw"/>
+                    <connections>
+                        <outlet property="barChartView" destination="h7X-CB-Rd6" id="2A2-he-qdl"/>
+                        <outlet property="barChartViewLong" destination="wTS-vT-K8v" id="Ysa-md-Xm6"/>
+                        <outlet property="barChartViewSmall" destination="kVd-8j-pFN" id="kHz-bG-Nmn"/>
+                        <outlet property="segment" destination="b40-au-35T" id="oVu-ll-aYN"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Xsi-Ax-IfE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1700.0000000000002" y="-815.625"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="gYz-oz-29o">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="rA0-yH-C4Q" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="zlP-gH-Ff9">
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="XU8-TZ-EQv"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="T4X-TD-5pd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="18.840579710144929" y="93.75"/>
         </scene>
@@ -35,9 +160,6 @@
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemBlueColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

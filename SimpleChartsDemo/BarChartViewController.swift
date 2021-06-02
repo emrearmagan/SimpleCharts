@@ -6,16 +6,53 @@
 //
 
 import UIKit
+import SimpleCharts
 
 class BarChartViewController: UIViewController {
 
+    @IBOutlet weak var barChartView: BarChartView!
+    @IBOutlet weak var barChartViewSmall: BarChartView!
+    @IBOutlet weak var barChartViewLong: BarChartView!
+    
+    @IBOutlet weak var segment: UISegmentedControl!
+    
+    private var defaultEntries: [BarEntryModel] = []
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        defaultEntries = [
+            BarEntryModel(value: 5, color: UIColor.init(red: 234/255, green: 76/255, blue: 137/255, alpha: 1), label: "Dribbble"),
+            BarEntryModel(value: 10, color: UIColor.init(red: 51/255, green: 51/255, blue: 51/255, alpha: 1), label: "Github"),
+            BarEntryModel(value: 5, color: UIColor.init(red: 24/255, green: 119/255, blue: 242/255, alpha: 1), label: "Facebook"),
+            BarEntryModel(value: 20, color: UIColor.init(red: 29/255, green: 161/255, blue: 242/255, alpha: 1), label: "Twitter"),
+            BarEntryModel(value: 8, color: UIColor.init(red: 29/255, green: 185/255, blue: 84/255, alpha: 1), label: "Spotify"),
+            BarEntryModel(value: 15, color: UIColor.init(red: 53/255, green: 70/255, blue: 92/255, alpha: 1), label: "Tumblr")
+        ]
+        
+        barChartView.entries = defaultEntries
+        
+        barChartViewSmall.showLegendary = false
+        barChartViewSmall.entries = defaultEntries
+        barChartViewSmall.backgroundColor = UIColor.white
+        
+        barChartViewLong.showLegendary = false
+        barChartViewLong.backgroundColor = UIColor.white
+        barChartViewLong.entries = defaultEntries
     }
     
 
+    @IBAction func segmetSelected(_ sender: UISegmentedControl) {
+        let numSegments = (sender.selectedSegmentIndex + 1) * 4
+        
+        var entries = [BarEntryModel]()
+        
+        for _ in 0..<numSegments {
+            let value = Double.random(in: 20.0...100.0)
+            let entry = defaultEntries[Int.random(in: 0...defaultEntries.count - 1)]
+            entries.append(BarEntryModel(value: value, color: entry.color, label: entry.label))
+        }
+        
+        barChartView.entries = entries
+    }
     /*
     // MARK: - Navigation
 
