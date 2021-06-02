@@ -8,15 +8,20 @@
 import UIKit
 
 public protocol BarChartViewDelegate: AnyObject {
+    // Called when a Bar has been selected inside the BarChartView
     func didSelect(selectedBar: Bar)
     
+    // Called when the animation for a Bar has started
     func animationDidStartFor(bar: Bar)
     
+    // Called when the animation for a Bar has finished/stopped
     func animationDidStopFor(bar: Bar)
 }
 
 public class BarChartView: UIView {
     // MARK: Public Properties
+    
+    /// Array of bar entries. Each entry contains information about its values, color and label
     public var entries: [BarEntryModel] = [] {
         didSet {
             addLegend()
@@ -32,57 +37,60 @@ public class BarChartView: UIView {
         }
     }
     
+    /// Returns the highest value of every entry in the BarChart
+    public var maxValue: Double {
+        return entries.reduce(Double(0)){max($0, $1.value)}
+    }
     
+    /// Duration of the animation for every Bar inside the BarChartView
     open var animationDuration: Double = 0.5
+    
+    /// Delay of the animation for every Bar inside the BarChartView
     open var animationDelay: Double = 1
     
+    /// Flag tha indicates of the legendary should be shown
     public var showLegendary = true {
         didSet {
             setupView()
         }
     }
     
-    public weak var delegate: BarChartViewDelegate?
-    public var maxValue: Double {
-        return entries.reduce(Double(Int.min)){max($0, $1.value)}
-    }
-    
+    open weak var delegate: BarChartViewDelegate?
     
     //MARK: Private Properties
+    /// Contains all BarLayers
     fileprivate(set) var container: CALayer = CALayer()
+    /// Contains all Bars from the BarLayer
     fileprivate(set) var bars: [Bar] = []
+    
+    /// LegendLayer of the BarChart
     fileprivate(set) lazy var legend: LegendLayer = {
         let layer =  LegendLayer()
         return layer
     }()
     
-    private var height: CGFloat {
-        return container.bounds.size.height
-    }
-    
-    private var width: CGFloat {
-        return container.bounds.size.width
-    }
-    
+    /// Flag indicated whether to animate the Bars inside the BarChart
     private var animated: Bool {
         return animationDuration > 0
     }
     
+    /// Width of every Bar inside the BarChart
     public var barWidth: CGFloat {
-        return width / CGFloat(entries.count + 1)
+        return container.bounds.size.width / CGFloat(entries.count + 1)
     }
     
-    //Space between each bar
+    /// Spacing between each bar
     private var spacing: CGFloat {
         return barWidth * (0.8 / CGFloat(entries.count - 1))
     }
     
-    //Space at the bottom of the bar to show the title
+    /// Space at the bottom of the bar to show the title
     private let bottomSpace: CGFloat = 0
     
-    //Space at the top of each bar to show the value
-    private let topSpace: CGFloat = 0
+    /// Space at the top of each bar to show the value
+    private let topSpace: CGFloat = 50
     
+    /// Rounding of each Bar based on the number of entries
     private var cornerRounding: CGFloat {
         return CGFloat(50 / entries.count)
     }
@@ -104,16 +112,15 @@ public class BarChartView: UIView {
         legend.frame = layer.bounds
         container.frame = layer.bounds
         //legend.backgroundColor = UIColor.red.cgColor
-        container.backgroundColor = UIColor.blue.withAlphaComponent(0.5).cgColor
+        //container.backgroundColor = UIColor.blue.withAlphaComponent(0.5).cgColor
     }
     
     //MARK: Functions
     public override func layoutSublayers(of layer: CALayer) {
         if (layer == self.layer) {
-            //print("here")
-            print(legend.bounds.height)
+            if showLegendary {
             container.frame = CGRect(x: 0, y:0, width: self.bounds.width, height: self.bounds.height - legend.bounds.height)
-            //legend.frame = layer.bounds
+            }
         }
         
         super.layoutSublayers(of: layer)
@@ -139,7 +146,7 @@ public class BarChartView: UIView {
         let xPos: CGFloat = CGFloat(index) * (barWidth + spacing)
         let yPos: CGFloat = translateHeightValueToYPosition(value: entry.value)
         
-        let bounds = CGRect(x: xPos, y: yPos, width: barWidth, height: height - bottomSpace - yPos)
+        let bounds = CGRect(x: xPos, y: yPos, width: barWidth, height: container.bounds.size.height - bottomSpace - yPos)
         
         bar.layer.anchorPoint = CGPoint(x: 1, y: 1)
         bar.layer.frame = bounds
@@ -150,9 +157,9 @@ public class BarChartView: UIView {
     }
     
     private func translateHeightValueToYPosition(value: Double) -> CGFloat {
-        let nValue = value / entries.reduce(0){max($0, $1.value)}
-        let height: CGFloat = CGFloat(nValue) * (self.height - bottomSpace - topSpace)
-        return self.height - bottomSpace - height
+        let nValue = value / maxValue
+        let height: CGFloat = CGFloat(nValue) * (container.bounds.size.height - bottomSpace - topSpace)
+        return container.bounds.size.height - bottomSpace - height
     }
     
     private func addLegend() {
@@ -167,6 +174,7 @@ public class BarChartView: UIView {
         
         legend.entries = legends
     }
+    
     public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?)
     {
         super.touchesBegan(touches, with: event)
@@ -211,6 +219,5 @@ extension BarChartView: BarLayerDelegate {
 
 extension BarChartView: LegendLayerDelegate {
     public func didDetermineSize(height: CGFloat) {
-        print(height)
     }
 }
