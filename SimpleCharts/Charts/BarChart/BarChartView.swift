@@ -18,22 +18,16 @@ public protocol BarChartViewDelegate: AnyObject {
     func animationDidStopFor(bar: Bar)
 }
 
-public class BarChartView: UIView {
+public class BarChartView: BaseChartView {
     // MARK: Public Properties
     
     /// Array of bar entries. Each entry contains information about its values, color and label
     public var entries: [BarEntryModel] = [] {
         didSet {
-            addLegend()
+            //addLegend()
             layoutIfNeeded()
-            
             container.sublayers?.forEach({$0.removeFromSuperlayer()})
-            
-            self.bars = self.generateBars(models: self.entries)
-            for bar in self.bars {
-                self.container.addSublayer(bar.layer)
-                bar.layer.present(animated: animated)
-            }
+            self.bars = self.generateBars(entry: self.entries)
         }
     }
     
@@ -42,17 +36,20 @@ public class BarChartView: UIView {
         return entries.reduce(Double(0)){max($0, $1.value)}
     }
     
-    /// Duration of the animation for every Bar inside the BarChartView
-    open var animationDuration: Double = 0.5
     
-    /// Delay of the animation for every Bar inside the BarChartView
-    open var animationDelay: Double = 1
+    /// Rounding of the corners
+    open var cornerRadius: CGFloat {
+        return (50.0 / CGFloat(entries.count))
+    }
     
-    /// Flag tha indicates of the legendary should be shown
-    public var showLegendary = true {
-        didSet {
-            setupView()
-        }
+    /// Spacing between each bar
+    open var spacing: CGFloat {
+        return barWidth * (0.8 / CGFloat(entries.count - 1))
+    }
+    
+    /// Width of every Bar inside the BarChart
+    public var barWidth: CGFloat {
+        return container.bounds.size.width / CGFloat(entries.count + 1)
     }
     
     open weak var delegate: BarChartViewDelegate?
@@ -61,27 +58,13 @@ public class BarChartView: UIView {
     /// Contains all BarLayers
     fileprivate(set) var container: CALayer = CALayer()
     /// Contains all Bars from the BarLayer
-    fileprivate(set) var bars: [Bar] = []
-    
-    /// LegendLayer of the BarChart
-    fileprivate(set) lazy var legend: LegendLayer = {
-        let layer =  LegendLayer()
-        return layer
-    }()
-    
-    /// Flag indicated whether to animate the Bars inside the BarChart
-    private var animated: Bool {
-        return animationDuration > 0
-    }
-    
-    /// Width of every Bar inside the BarChart
-    public var barWidth: CGFloat {
-        return container.bounds.size.width / CGFloat(entries.count + 1)
-    }
-    
-    /// Spacing between each bar
-    private var spacing: CGFloat {
-        return barWidth * (0.8 / CGFloat(entries.count - 1))
+    fileprivate(set) var bars: [Bar] = [] {
+        didSet {
+            for (index, bar) in self.bars.enumerated() {
+                self.container.addSublayer(bar.layer)
+                bar.layer.present(animated: animated, oldLayer: oldValue[safe: index]?.layer)
+            }
+        }
     }
     
     /// Space at the bottom of the bar to show the title
@@ -107,26 +90,23 @@ public class BarChartView: UIView {
     }
     
     private func setupView() {
-        self.layer.addSublayer(legend)
         self.layer.addSublayer(container)
-        legend.frame = layer.bounds
-        container.frame = layer.bounds
-        //legend.backgroundColor = UIColor.red.cgColor
-        //container.backgroundColor = UIColor.blue.withAlphaComponent(0.5).cgColor
     }
     
     //MARK: Functions
     public override func layoutSublayers(of layer: CALayer) {
         if (layer == self.layer) {
-            if showLegendary {
-            container.frame = CGRect(x: 0, y:0, width: self.bounds.width, height: self.bounds.height - legend.bounds.height)
-            }
+            /*if showLegendary {
+             container.frame = CGRect(x: 0, y:0, width: self.bounds.width, height: self.bounds.height - legend.bounds.height)
+             }*/
+            container.frame = self.bounds
+            container.masksToBounds = true
         }
         
         super.layoutSublayers(of: layer)
     }
     
-    private func generateBars(models: [BarEntryModel]) -> [Bar] {
+    private func generateBars(entry: [BarEntryModel]) -> [Bar] {
         var bars: [Bar] = []
         
         for(index, entry) in entries.enumerated() {
@@ -153,6 +133,18 @@ public class BarChartView: UIView {
         bar.layer.barLayerDelegate = self
         bar.layer.barEntry = data
         
+        /*        let label = CATextLayer()
+         label.fontSize = 12
+         label.font = UIFont.systemFont(ofSize: 12)
+         
+         let w = String(entry.value).widthOfString(usingFont: UIFont.systemFont(ofSize: 12))
+         label.frame = CGRect(x: (xPos + barWidth / 2) - w / 2, y: yPos - topSpace, width: String(entry.value).widthOfString(usingFont: UIFont.systemFont(ofSize: 12)), height: String(entry.value).heightOfString(usingFont: UIFont.systemFont(ofSize: 12)))
+         label.string = NSString(string: String(Int(entry.value)))
+         label.alignmentMode = .left
+         label.foregroundColor = UIColor.black.resolvedColor(with: .current).cgColor
+         label.contentsScale = UIScreen.main.scale
+         container.addSublayer(label)*/
+        
         return bar
     }
     
@@ -162,22 +154,18 @@ public class BarChartView: UIView {
         return container.bounds.size.height - bottomSpace - height
     }
     
-    private func addLegend() {
-        if !showLegendary {
-            return
-        }
-        
-        var legends: [LegendEntry] = []
-        for e in entries {
-            legends.append(LegendEntry(color: e.color, label: e.label))
-        }
-        
-        legend.entries = legends
+    public func updateEntries(entries: [BarEntryModel], animationDuration: Double) {
+        self.animationDuration = animationDuration
+        self.entries = entries
     }
-    
+}
+
+//MARK: Touch
+extension BarChartView {
     public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?)
     {
         super.touchesBegan(touches, with: event)
+        guard markSelected else {return}
         
         if let touch = touches.first, let touchedLayer = self.layerFor(touch) as? BarLayer
         {
@@ -201,8 +189,9 @@ public class BarChartView: UIView {
         
         return hitPresentationLayer?.model()
     }
+    
 }
-
+//MARK: BarLayerDelegate
 extension BarChartView: BarLayerDelegate {
     public func animationDidStart(bar: Bar){
         delegate?.animationDidStartFor(bar: bar)
@@ -217,6 +206,7 @@ extension BarChartView: BarLayerDelegate {
     }
 }
 
+//MARK: LegendLayerDelegate
 extension BarChartView: LegendLayerDelegate {
     public func didDetermineSize(height: CGFloat) {
     }

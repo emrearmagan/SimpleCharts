@@ -109,7 +109,11 @@ open class BarLayer: CALayer {
         // MARK: TODO: Use boundsManaged for animation: Somehow its nil.. and beginTime not working properly
         if key == "boundsManaged" {
             let animation = CABasicAnimation(keyPath: "bounds")
-            animation.fromValue = CGRect(x: self.bounds.maxX, y: self.bounds.height - 0, width: width, height: 0)
+            if let bounds = oldLayer {
+                animation.fromValue = bounds.bounds
+            } else {
+                animation.fromValue = CGRect(x: self.bounds.maxX, y: self.bounds.height - 0, width: width, height: 0)
+            }
             animation.toValue = self.bounds
             
             animation.duration = animationDuration
@@ -122,8 +126,10 @@ open class BarLayer: CALayer {
         return super.action(forKey: key)
     }
 
+    var oldLayer: CALayer?
     // Presents the bar based on the representation/animation
-    public func present(animated: Bool) {
+    public func present(animated: Bool, oldLayer: CALayer?) {
+        self.oldLayer = oldLayer
         let bounds = CGRect(x: self.bounds.maxX, y: self.bounds.height - 0, width: width, height: 0)
         let f = {self.boundsManaged = bounds}
         if animated {
