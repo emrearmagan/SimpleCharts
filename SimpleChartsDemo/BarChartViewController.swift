@@ -28,15 +28,33 @@ class BarChartViewController: UIViewController {
             BarEntryModel(value: 15, color: UIColor.init(red: 53/255, green: 70/255, blue: 92/255, alpha: 1), label: "Tumblr")
         ]
         
+        barChartView.backgroundColor = .white
+        barChartView.layer.cornerRadius = 10
         barChartView.entries = defaultEntries
         
+        //barChartViewSmall.showLegendary = false
+        barChartViewSmall.backgroundColor = .white
         barChartViewSmall.showLegendary = false
+        barChartViewSmall.layer.cornerRadius = 10
         barChartViewSmall.entries = defaultEntries
-        barChartViewSmall.backgroundColor = UIColor.white
         
+        barChartViewLong.backgroundColor = .white
         barChartViewLong.showLegendary = false
-        barChartViewLong.backgroundColor = UIColor.white
+        barChartViewLong.layer.cornerRadius = 10
         barChartViewLong.entries = defaultEntries
+        
+        
+        let _ = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [self] timer in
+            var entries = [BarEntryModel]()
+            for i in 0..<self.defaultEntries.count {
+                let value = Double.random(in: 20.0...100.0)
+                let entry = self.defaultEntries[i]
+                entries.append(BarEntryModel(value: value, color: entry.color, label: entry.label))
+            }
+            
+            entries.append(self.defaultEntries[Int.random(in: 0...5)])
+            self.barChartViewSmall.updateEntries(entries: entries, animationDuration: 0.5)
+        }
     }
     
 
@@ -53,6 +71,7 @@ class BarChartViewController: UIViewController {
         
         barChartView.entries = entries
     }
+
     /*
     // MARK: - Navigation
 

@@ -27,6 +27,7 @@ public class BarChartView: BaseChartView {
             //addLegend()
             layoutIfNeeded()
             container.sublayers?.forEach({$0.removeFromSuperlayer()})
+            
             self.bars = self.generateBars(entry: self.entries)
         }
     }
@@ -57,12 +58,16 @@ public class BarChartView: BaseChartView {
     //MARK: Private Properties
     /// Contains all BarLayers
     fileprivate(set) var container: CALayer = CALayer()
+    
+    /// A flag indicated whether the entries have been updated or set
+    private(set) var updatingEntries = false
+    
     /// Contains all Bars from the BarLayer
     fileprivate(set) var bars: [Bar] = [] {
         didSet {
             for (index, bar) in self.bars.enumerated() {
                 self.container.addSublayer(bar.layer)
-                bar.layer.present(animated: animated, oldLayer: oldValue[safe: index]?.layer)
+                bar.layer.present(animated: animated, oldLayer: updatingEntries ? oldValue[safe: index]?.layer : nil)
             }
         }
     }
@@ -104,6 +109,15 @@ public class BarChartView: BaseChartView {
         }
         
         super.layoutSublayers(of: layer)
+    }
+    
+    
+    public func updateEntries(entries: [BarEntryModel], animationDuration: Double) {
+        self.animationDuration = animationDuration
+        
+        self.updatingEntries = true
+        self.entries = entries
+        self.updatingEntries = true
     }
     
     private func generateBars(entry: [BarEntryModel]) -> [Bar] {
@@ -153,11 +167,7 @@ public class BarChartView: BaseChartView {
         let height: CGFloat = CGFloat(nValue) * (container.bounds.size.height - bottomSpace - topSpace)
         return container.bounds.size.height - bottomSpace - height
     }
-    
-    public func updateEntries(entries: [BarEntryModel], animationDuration: Double) {
-        self.animationDuration = animationDuration
-        self.entries = entries
-    }
+
 }
 
 //MARK: Touch

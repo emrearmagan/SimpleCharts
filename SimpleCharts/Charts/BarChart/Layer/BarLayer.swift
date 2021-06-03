@@ -66,6 +66,8 @@ open class BarLayer: CALayer {
         self.animationDelay = animationDelay
         self.cornerRounding = cornerRounding
         self.backgroundColor = color.cgColor
+        
+        
     }
     
     override init(layer: Any) {
@@ -125,7 +127,7 @@ open class BarLayer: CALayer {
         
         return super.action(forKey: key)
     }
-
+    
     var oldLayer: CALayer?
     // Presents the bar based on the representation/animation
     public func present(animated: Bool, oldLayer: CALayer?) {

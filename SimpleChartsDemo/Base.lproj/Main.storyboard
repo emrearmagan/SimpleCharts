@@ -77,11 +77,6 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="250" id="8C7-Bc-2z3"/>
                                 </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <integer key="value" value="10"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kVd-8j-pFN" customClass="BarChartView" customModule="SimpleCharts">
                                 <rect key="frame" x="132" y="491" width="150" height="150"/>
@@ -90,11 +85,6 @@
                                     <constraint firstAttribute="height" constant="150" id="jAf-eL-sAs"/>
                                     <constraint firstAttribute="width" constant="150" id="ucm-1w-rWE"/>
                                 </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <integer key="value" value="10"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wTS-vT-K8v" customClass="BarChartView" customModule="SimpleCharts">
                                 <rect key="frame" x="50" y="691" width="314" height="130"/>
@@ -102,11 +92,6 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="130" id="cpT-9n-ND8"/>
                                 </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <integer key="value" value="10"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="xTS-Zb-Jl7"/>
