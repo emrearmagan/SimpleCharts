@@ -29,9 +29,22 @@ A simple charting library for iOS.
 - 🖖 Touch events
 - ✨ Bar charts are fully customizable and animated
 
-### Quick start
+--- 
+### 💻 Table of contents
+  1. [Quick Start](#quickStart)
+      1. [Bar chart](#barChart)
+      2. [Range chart](#rangeChart)
+      3. [Group chart](#groupChart)
+      4. [Line chart](#lineChart)
+      5. [Configuring touch events](#touchEvent)
+  2. [Chart options](#chartOptions)
+  3. [Getting started](#gettingStarted)
+  4. [Contribute](#contribute)
 
-###### Bar chart:
+
+### Quick start <a name="quickStart"></a>
+
+###### Bar chart: <a name="barChart"></a>
 <p align="center">
   <img src="./SimpleChartsDemo/SupportFiles/Preview/barChart.gif" alt="BarChart" width= 50%>
 </p>
@@ -56,7 +69,7 @@ chart.entries = [
 self.view.addSubview(chart)
 ```
 
-###### Range chart:
+###### Range chart: <a name="rangeChart"></a>
 <p align="center">
   <img src="./SimpleChartsDemo/SupportFiles/Preview/rangeChart.gif" alt="RangeChart" width= 50%>
 </p>
@@ -82,7 +95,7 @@ chart.entries = [
 self.view.addSubview(chart)
 ```
 
-###### Group chart:
+###### Group chart: <a name="groupChart"></a>
 
 <p align="center">
   <img src="./SimpleChartsDemo/SupportFiles/Preview/groupChart.gif" alt="GroupChart" width= 50%>
@@ -122,7 +135,7 @@ chart.entries = [
 self.view.addSubview(chart)
 ```
 
-###### Line chart (Beta):
+###### Line chart (Beta): <a name="lineChart"></a>
 <p align="center">
   <img src="./SimpleChartsDemo/SupportFiles/Preview/lineChart.gif" alt="LineChart" width= 50%>
 </p>
@@ -137,7 +150,7 @@ chart.dataPoints = [
 self.view.addSubview(chart)
 ```
 
-### Configuring touch events
+###### Configuring touch events <a name="touchEvent"></a>
 
 To make the chart respond to touch events, implement the `BarChartDelegate` protocol in your class, e.g. a View Controller, and then set the chart’s `delegate` property:
 
@@ -165,7 +178,7 @@ class MyViewController: UIViewController, ChartDelegate {
 
 <!-- TODO: Add Information about Bar, BarContainer and BarContainerData -->
 
-### Chart options
+### Chart options <a name="chartOptions"></a>
 
 Chart Options (Currently not supported for LineChart):
 
@@ -213,9 +226,9 @@ Group Chart:
 |-------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `groupSpacing`          | Spacing between each group (`CGFloat`, default `10`) |
 
-### Getting started
+### Getting started <a name="gettingStarted"></a>
 
-##### Swift Package Manager Install
+##### Swift Package Manager Install <a name="packageManager"></a>
 Swift Package Manager
 
 ```swift
@@ -224,11 +237,11 @@ dependencies: [
 ]
 ```
 
-##### Installing SwiftChart manually
+##### Installing SwiftChart manually <a name="manually"></a>
 1. Download SimpleCharts.zip from the last release and extract its content in your project's folder.
 2. From the Xcode project, choose Add Files to ... from the File menu and add the extracted files.
 
-### Contribute
+### Contribute <a name="contribute"></a>
 Contributions are highly appreciated! To submit one:
 1. Fork
 2. Commit changes to a branch in your fork
