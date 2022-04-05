@@ -22,7 +22,7 @@ class GroupChartViewController: UIViewController {
                 groupedEntries.append(GroupedEntryModel(entries: entry, label: label))
             }
         }
-        
+
         groupedChartView.setGroupBarChartOptions([
             .xAxisFont(.HelveticaNeue.medium(size: 10)),
             .yAxisFont(.HelveticaNeue.bold(size: 10)),

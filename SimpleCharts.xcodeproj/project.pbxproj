@@ -14,6 +14,11 @@
 		D02F751C27FCC8410073DD82 /* LineChartEntryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02F751B27FCC8410073DD82 /* LineChartEntryModel.swift */; };
 		D02F751E27FCCD420073DD82 /* GroupBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02F751D27FCCD420073DD82 /* GroupBar.swift */; };
 		D02F752027FCCD540073DD82 /* RangeBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02F751F27FCCD540073DD82 /* RangeBar.swift */; };
+		D055F27727FCD50E00675E9D /* appicon.png in Resources */ = {isa = PBXBuildFile; fileRef = D055F27627FCD50E00675E9D /* appicon.png */; };
+		D055F28927FCE2D600675E9D /* rangeChart.gif in Resources */ = {isa = PBXBuildFile; fileRef = D055F28627FCE2D600675E9D /* rangeChart.gif */; };
+		D055F28A27FCE2D600675E9D /* groupChart.gif in Resources */ = {isa = PBXBuildFile; fileRef = D055F28727FCE2D600675E9D /* groupChart.gif */; };
+		D055F28B27FCE2D600675E9D /* lineChart.gif in Resources */ = {isa = PBXBuildFile; fileRef = D055F28827FCE2D600675E9D /* lineChart.gif */; };
+		D055F28D27FCE4F100675E9D /* barChart.gif in Resources */ = {isa = PBXBuildFile; fileRef = D055F28C27FCE4F100675E9D /* barChart.gif */; };
 		D0AD75A427FC781B00A1AF0E /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AD75A327FC781B00A1AF0E /* Double.swift */; };
 		D0AD75BA27FC7A3B00A1AF0E /* BaseBarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AD75A827FC7A3B00A1AF0E /* BaseBarChartView.swift */; };
 		D0AD75BB27FC7A3B00A1AF0E /* RangeBarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AD75A927FC7A3B00A1AF0E /* RangeBarChartView.swift */; };
@@ -94,6 +99,11 @@
 		D02F751B27FCC8410073DD82 /* LineChartEntryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineChartEntryModel.swift; sourceTree = "<group>"; };
 		D02F751D27FCCD420073DD82 /* GroupBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupBar.swift; sourceTree = "<group>"; };
 		D02F751F27FCCD540073DD82 /* RangeBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeBar.swift; sourceTree = "<group>"; };
+		D055F27627FCD50E00675E9D /* appicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = appicon.png; sourceTree = "<group>"; };
+		D055F28627FCE2D600675E9D /* rangeChart.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = rangeChart.gif; sourceTree = "<group>"; };
+		D055F28727FCE2D600675E9D /* groupChart.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = groupChart.gif; sourceTree = "<group>"; };
+		D055F28827FCE2D600675E9D /* lineChart.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = lineChart.gif; sourceTree = "<group>"; };
+		D055F28C27FCE4F100675E9D /* barChart.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = barChart.gif; sourceTree = "<group>"; };
 		D0AD75A327FC781B00A1AF0E /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
 		D0AD75A827FC7A3B00A1AF0E /* BaseBarChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseBarChartView.swift; sourceTree = "<group>"; };
 		D0AD75A927FC7A3B00A1AF0E /* RangeBarChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RangeBarChartView.swift; sourceTree = "<group>"; };
@@ -184,6 +194,29 @@
 				D0F9944826616BB300890554 /* LaunchScreen.storyboard */,
 			);
 			path = Storyboard;
+			sourceTree = "<group>";
+		};
+		D055F27427FCD49700675E9D /* Preview */ = {
+			isa = PBXGroup;
+			children = (
+				D055F28C27FCE4F100675E9D /* barChart.gif */,
+				D055F28727FCE2D600675E9D /* groupChart.gif */,
+				D055F28827FCE2D600675E9D /* lineChart.gif */,
+				D055F28627FCE2D600675E9D /* rangeChart.gif */,
+				D055F27627FCD50E00675E9D /* appicon.png */,
+			);
+			path = Preview;
+			sourceTree = "<group>";
+		};
+		D055F27527FCD49C00675E9D /* SupportFiles */ = {
+			isa = PBXGroup;
+			children = (
+				D055F27427FCD49700675E9D /* Preview */,
+				D0AD75FB27FC7DCE00A1AF0E /* Helper.swift */,
+				D0F9944626616BB300890554 /* Assets.xcassets */,
+				D0F9944B26616BB300890554 /* Info.plist */,
+			);
+			path = SupportFiles;
 			sourceTree = "<group>";
 		};
 		D0AD75A627FC7A1200A1AF0E /* Charts */ = {
@@ -309,9 +342,7 @@
 				D02F752127FCCD9E0073DD82 /* Storyboard */,
 				D02F751027FCB1A40073DD82 /* Controller */,
 				D0AD75FE27FC8F9300A1AF0E /* Extension */,
-				D0AD75FB27FC7DCE00A1AF0E /* Helper.swift */,
-				D0F9944626616BB300890554 /* Assets.xcassets */,
-				D0F9944B26616BB300890554 /* Info.plist */,
+				D055F27527FCD49C00675E9D /* SupportFiles */,
 			);
 			path = SimpleChartsDemo;
 			sourceTree = "<group>";
@@ -472,9 +503,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D055F27727FCD50E00675E9D /* appicon.png in Resources */,
 				D0F9944A26616BB300890554 /* LaunchScreen.storyboard in Resources */,
+				D055F28B27FCE2D600675E9D /* lineChart.gif in Resources */,
+				D055F28A27FCE2D600675E9D /* groupChart.gif in Resources */,
+				D055F28927FCE2D600675E9D /* rangeChart.gif in Resources */,
 				D0F9944726616BB300890554 /* Assets.xcassets in Resources */,
 				D0F9944526616BB100890554 /* Main.storyboard in Resources */,
+				D055F28D27FCE4F100675E9D /* barChart.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -796,7 +832,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = L7BXVNN29K;
-				INFOPLIST_FILE = SimpleChartsDemo/Info.plist;
+				INFOPLIST_FILE = SimpleChartsDemo/SupportFiles/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -816,7 +852,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = L7BXVNN29K;
-				INFOPLIST_FILE = SimpleChartsDemo/Info.plist;
+				INFOPLIST_FILE = SimpleChartsDemo/SupportFiles/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

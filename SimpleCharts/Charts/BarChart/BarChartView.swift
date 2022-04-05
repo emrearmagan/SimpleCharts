@@ -22,7 +22,7 @@ public class BarChartView: BaseBarChartView {
         }
     }
     
-    /// Delegate of  SYBarChartView
+    /// Delegate of  BarChartView
     weak var delegate: BarChartDelegate?
    
     /// Contains all Bars from the BarLayer
