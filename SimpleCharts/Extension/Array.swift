@@ -2,7 +2,7 @@
 //  Array.swift
 //  SimpleCharts
 //
-//  Created by Emre Armagan on 03.06.21.
+//  Created by Emre Armagan on 05.04.22.
 //
 
 import Foundation

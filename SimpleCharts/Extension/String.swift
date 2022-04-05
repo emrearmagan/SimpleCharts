@@ -2,7 +2,7 @@
 //  String.swift
 //  SimpleCharts
 //
-//  Created by Emre Armagan on 01.06.21.
+//  Created by Emre Armagan on 05.04.22.
 //
 
 import UIKit

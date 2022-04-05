@@ -177,6 +177,15 @@
 			path = LineChart;
 			sourceTree = "<group>";
 		};
+		D02F752127FCCD9E0073DD82 /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				D0F9944326616BB100890554 /* Main.storyboard */,
+				D0F9944826616BB300890554 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboard;
+			sourceTree = "<group>";
+		};
 		D0AD75A627FC7A1200A1AF0E /* Charts */ = {
 			isa = PBXGroup;
 			children = (
@@ -295,14 +304,13 @@
 		D0F9943C26616BB100890554 /* SimpleChartsDemo */ = {
 			isa = PBXGroup;
 			children = (
-				D02F751027FCB1A40073DD82 /* Controller */,
-				D0AD75FE27FC8F9300A1AF0E /* Extension */,
 				D0F9943D26616BB100890554 /* AppDelegate.swift */,
 				D0F9943F26616BB100890554 /* SceneDelegate.swift */,
+				D02F752127FCCD9E0073DD82 /* Storyboard */,
+				D02F751027FCB1A40073DD82 /* Controller */,
+				D0AD75FE27FC8F9300A1AF0E /* Extension */,
 				D0AD75FB27FC7DCE00A1AF0E /* Helper.swift */,
-				D0F9944326616BB100890554 /* Main.storyboard */,
 				D0F9944626616BB300890554 /* Assets.xcassets */,
-				D0F9944826616BB300890554 /* LaunchScreen.storyboard */,
 				D0F9944B26616BB300890554 /* Info.plist */,
 			);
 			path = SimpleChartsDemo;
