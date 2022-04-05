@@ -1,35 +1,18 @@
 //
-//  BarEntry.swift
-//  SimpleCharts
+//  SYBarEntryModel.swift
+//  socially
 //
-//  Created by Emre Armagan on 29.05.21.
+//  Created by Emre Armagan on 07.09.21.
 //
 
-import Foundation
 import UIKit
 
-public class BaseEntryModel {
-    public let color: UIColor
-    public let label: String
-    
-    public init(color: UIColor, label: String) {
-        self.color = color
-        self.label = label
-    }
-}
 
-public class BarEntryModel: BaseEntryModel, Comparable {
-    public var value: Double
-    
-    public static func <(lhs: BarEntryModel, rhs: BarEntryModel) -> Bool {
-        return lhs.value < rhs.value
-    }
-    public static func ==(lhs: BarEntryModel, rhs: BarEntryModel) -> Bool {
-        return lhs.value == rhs.value
-    }
+public class BarEntryModel: BaseEntryModel {
+    public let color: UIColor
     
     public init(value: Double, color: UIColor, label: String) {
-        self.value = value
-        super.init(color: color, label: label)
+        self.color = color
+        super.init(value: value, label: label)
     }
 }

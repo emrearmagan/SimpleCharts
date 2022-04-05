@@ -1,96 +1,41 @@
 //
 //  BarChartView.swift
-//  SimpleCharts
+//  SimpleChart
 //
-//  Created by Emre Armagan on 29.05.21.
+//  Created by Emre Armagan on 05.04.22.
 //
 
 import UIKit
 
-public protocol BarChartViewDelegate: AnyObject {
-    // Called when a Bar has been selected inside the BarChartView
-    func didSelect(selectedBar: Bar)
-    
-    // Called when the animation for a Bar has started
-    func animationDidStartFor(bar: Bar)
-    
-    // Called when the animation for a Bar has finished/stopped
-    func animationDidStopFor(bar: Bar)
-}
-
-public class BarChartView: BaseChartView {
-    // MARK: Public Properties
+public class BarChartView: BaseBarChartView {
+    // MARK: Properties
     
     /// Array of bar entries. Each entry contains information about its values, color and label
     public var entries: [BarEntryModel] = [] {
         didSet {
             layoutIfNeeded()
-            container.sublayers?.forEach({$0.removeFromSuperlayer()})
             
-            self.bars = self.generateBars(entry: self.entries)
+            self.baseEntries = entries
+
+            container.sublayers?.forEach({$0.removeFromSuperlayer()})
+            self.bars = self.generateBars(entries: self.entries)
         }
     }
     
-    /// Returns the highest value of every entry in the BarChart
-    public var maxValue: Double {
-        return entries.reduce(Double(0)){max($0, $1.value)}
-    }
-    
-    /// Rounding of each Bar based on the number of entries
-    open var cornerRounding: CGFloat {
-        return CGFloat(50 / entries.count)
-    }
-    
-    override func notifyConstraintChanges() {
-        //let e = entries
-        //entries = e
-        
-        for (index, bar) in bars.enumerated() {
-            let x = CGFloat(index) * (barWidth + spacing)
-            let xPos: CGFloat = x
-            let yPos: CGFloat = translateHeightValueToYPosition(value: bar.data.model.value)
-        
-        let bounds = CGRect(x: xPos, y: yPos, width: barWidth, height: container.bounds.size.height - bottomSpace - yPos)
-        
-        //bar.layer.anchorPoint = CGPoint(x: 1, y: 1)
-        bar.layer.frame = bounds
-        }
-        //updateEntries(entries: entries, animationDuration: 0.5)
-        
-    }
-    
-    /// Spacing between each bar
-    open var spacing: CGFloat {
-        return container.bounds.size.width * (0.2 / CGFloat(entries.count - 1))
-    }
-    
-    /// Width of every Bar inside the BarChart
-    open var barWidth: CGFloat {
-        //return container.bounds.size.width / CGFloat(entries.count + 1)
-        return container.bounds.size.width / CGFloat(entries.count) - spacing
-    }
-    
-    open weak var delegate: BarChartViewDelegate?
-    
-    //MARK: Private Properties
-    /// A flag indicated whether the entries have been updated or set
-    private(set) var updatingEntries = false
-    
+    /// Delegate of  SYBarChartView
+    weak var delegate: BarChartDelegate?
+   
     /// Contains all Bars from the BarLayer
     fileprivate(set) var bars: [Bar] = [] {
         didSet {
             for (index, bar) in self.bars.enumerated() {
-                self.container.addSublayer(bar.layer)
-                bar.layer.present(animated: animated, oldLayer: updatingEntries ? oldValue[safe: index]?.layer : nil)
+                self.container.addSublayer(bar.container)
+                bar.container.present(animated: animated, oldLayer: updatingEntries ? oldValue[safe: index]?.container : nil)
             }
         }
     }
     
-    /// Space at the bottom of the bar to show the title
-    private let bottomSpace: CGFloat = 0
     
-    /// Space at the top of each bar to show the value
-    private let topSpace: CGFloat = 10
     
     //MARK: Init
     required init?(coder aDecoder: NSCoder) {
@@ -100,57 +45,72 @@ public class BarChartView: BaseChartView {
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
-    
-    
-    override public func layoutSubviews() {
-        super.layoutSubviews()
-    }
-    
+ 
     //MARK: Functions
-    public func updateEntries(entries: [BarEntryModel], animationDuration: Double) {
+    override public func updateEntries(entries: [BaseEntryModel], animationDuration: Double) {
+        guard let entries = entries as? [BarEntryModel] else {
+            return
+        }
         self.animationDuration = animationDuration
         
         self.updatingEntries = true
         self.entries = entries
-        self.updatingEntries = true
+        self.updatingEntries = false
     }
     
-    private func generateBars(entry: [BarEntryModel]) -> [Bar] {
+    override func notifyConstraintChanges() {
+        for (index, bar) in bars.enumerated() {
+            let xPos: CGFloat = calculateXPos(for: index)
+            let yPos: CGFloat = translateHeightValueToYPosition(value: bar.data.model?.value ?? container.bounds.size.height)
+            
+            let containerBound = CGRect(x: xPos, y: 0, width: barWidth, height: container.bounds.size.height)
+            bar.container.frame = containerBound
+            bar.container.setBarLayerHeight(to: yPos, direction: .bottom)
+        }
+        //updateEntries(entries: entries, animationDuration: 0.5)
+    }
+ 
+    private func generateBars(entries: [BarEntryModel]) -> [Bar] {
         var bars: [Bar] = []
         
-        for(index, entry) in entries.enumerated() {
+        for index in 0..<_maxEntries {
+            let entry = entries[safe: index]
             let bar = generateBar(entry: entry, index: index)
             bars.append(bar)
         }
+        
+        guard let minBars = minEntryCount else {
+            return bars
+        }
+        
+       if _maxEntries < minBars {
+            for i in 0..<minBars - _maxEntries {
+                let bar = generateBar(entry: nil , index: i + numberOfEntries)
+                bars.append(bar)
+            }
+       }
         return bars
     }
     
     
-    private func generateBar(entry: BarEntryModel, index: Int) -> Bar{
+    private func generateBar(entry: BarEntryModel?, index: Int) -> Bar {
         
-        let data = BarLayerData(model: entry, id: index)
-        let bar = Bar(layer: BarLayer(width: barWidth, color: entry.color, animationDuration: animationDuration, animationDelay: animationDelay, cornerRounding: cornerRounding), data: data)
+        let data = BarContainerData(model: entry, id: index)
         
-        let x = CGFloat(index) * (barWidth + spacing)
-        let xPos: CGFloat = x
-        let yPos: CGFloat = translateHeightValueToYPosition(value: entry.value)
+        let bar = Bar(container: BarContainer(width: barWidth, color: entry?.color ?? .clear , animationDuration: animationDuration, animationDelay: animationDelay, cornerRounding: cornerRounding, containerColor: containerColor), data: data)
         
-        let bounds = CGRect(x: xPos, y: yPos, width: barWidth, height: container.bounds.size.height - bottomSpace - yPos)
+        let xPos: CGFloat = calculateXPos(for: index)
+        let yPos: CGFloat = translateHeightValueToYPosition(value: entry?.value ?? container.bounds.size.height)
         
-        bar.layer.anchorPoint = CGPoint(x: 1, y: 1)
-        bar.layer.frame = bounds
-        bar.layer.barLayerDelegate = self
-        bar.layer.barEntry = data
+        let containerBound = CGRect(x: xPos, y: 0, width: barWidth, height: container.bounds.size.height)
+
+        bar.container.frame = containerBound
+        bar.container.setBarLayerHeight(to: yPos, direction: .bottom)
+        bar.container.containerDelegate = self
+        bar.container.barEntry = data
         
         return bar
     }
-    
-    private func translateHeightValueToYPosition(value: Double) -> CGFloat {
-        let nValue = value / maxValue
-        let height: CGFloat = CGFloat(nValue) * (container.bounds.size.height - bottomSpace - topSpace)
-        return container.bounds.size.height - bottomSpace - height
-    }
-    
 }
 
 //MARK: Touch
@@ -160,12 +120,12 @@ extension BarChartView {
         super.touchesBegan(touches, with: event)
         guard markSelected else {return}
         
-        if let touch = touches.first, let touchedLayer = self.layerFor(touch) as? BarLayer
+        if let touch = touches.first, let touchedLayer = self.layerFor(touch) as? BarContainer
         {
             //print(touchedLayer.hashValue)
             self.bars.forEach({ bar in
-                let selected = bar.layer.selected
-                bar.layer.selected = bar.layer.hashValue == touchedLayer.hashValue ? !selected : false
+                let selected = bar.container.selected
+                bar.container.selected = bar.container.hashValue == touchedLayer.hashValue ? !selected : false
             })
             
         }
@@ -185,7 +145,7 @@ extension BarChartView {
     
 }
 //MARK: BarLayerDelegate
-extension BarChartView: BarLayerDelegate {
+extension BarChartView: BarContainerDelegate {
     public func animationDidStart(bar: Bar){
         delegate?.animationDidStartFor(bar: bar)
     }
@@ -199,8 +159,4 @@ extension BarChartView: BarLayerDelegate {
     }
 }
 
-//MARK: LegendLayerDelegate
-extension BarChartView: LegendLayerDelegate {
-    public func didDetermineSize(height: CGFloat) {
-    }
-}
+

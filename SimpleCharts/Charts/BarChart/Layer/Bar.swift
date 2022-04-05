@@ -1,19 +1,19 @@
 //
 //  Bar.swift
-//  SimpleCharts
+//  SimpleChart
 //
-//  Created by Emre Armagan on 30.05.21.
+//  Created by Emre Armagan on 05.04.22.
 //
 
 import Foundation
 
 // Represents a Bar in the BarChart. Each Bar consists of a layer and data.
 public struct Bar: Hashable {
-    public internal(set) var layer: BarLayer
-    public internal(set) var data: BarLayerData
+    public internal(set) var container: BarContainer
+    public internal(set) var data: BarContainerData
     
-    public init(layer: BarLayer, data: BarLayerData) {
-        self.layer = layer
+    public init(container: BarContainer, data: BarContainerData) {
+        self.container = container
         self.data = data
     }
     
@@ -25,5 +25,3 @@ public struct Bar: Hashable {
         return lhs.data.id == rhs.data.id
     }
 }
-
-

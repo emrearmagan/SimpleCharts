@@ -1,36 +1,22 @@
 //
 //  BarLayer.swift
-//  SimpleCharts
+//  SimpleChart
 //
-//  Created by Emre Armagan on 29.05.21.
+//  Created by Emre Armagan on 05.04.22.
 //
 
 import UIKit
 
 public protocol BarLayerDelegate: AnyObject {
-    func didSelectLayer(bar: Bar)
-    
     // Called when the animation for the Layer has been started
-    func animationDidStart(bar: Bar)
+    func animationDidStart()
     
     // Called when the animation for the Layer has been finished/stopped
-    func animationDidStop(bar: Bar)
+    func animationDidStop()
 }
 
 open class BarLayer: CALayer {
-    //MARK: Public Properties
-    
-    /// Animates the bar if selected
-    public var selected: Bool = false {
-        didSet {
-            animateSelected(selected: selected)
-            if selected {
-                guard let entry = barEntry else { return}
-                barLayerDelegate?.didSelectLayer(bar: Bar(layer: self, data: entry))
-            }
-        }
-    }
-    
+    //MARK: Properties
     /// Color of the Bar
     public var color = UIColor.systemBlue
     
@@ -43,22 +29,21 @@ open class BarLayer: CALayer {
     /// Rounding of the bar
     public var cornerRounding: CGFloat = 5
     
-    /// Data of the bar
-    public var barEntry: BarLayerData?
-    open weak var barLayerDelegate: BarLayerDelegate?
+    /// Delegate
+    weak var barLayerDelegate: BarLayerDelegate?
     
-    //MARK: Private Properties
     
     /// Width of the bar
-    private var width: CGFloat = 0
-    
-    /// Custom animation key for animating the bounds of the bar
-    @NSManaged var boundsManaged: CGRect
+    private(set) var width: CGFloat = 10
     
     /// A flag indicated whether or not to animate the layer
-    private var disabledAnimation = false
+    private(set) var disabledAnimation = false
     
-    //MARK: init
+    /// Custom animation key for animating the bounds of the bar
+    @NSManaged private var boundsManaged: CGRect
+    
+    
+    //MARK: Lifecycle
     init(width: CGFloat, color: UIColor, animationDuration: Double, animationDelay: Double, cornerRounding: CGFloat) {
         super.init()
         self.width = width
@@ -67,8 +52,7 @@ open class BarLayer: CALayer {
         self.animationDelay = animationDelay
         self.cornerRounding = cornerRounding
         self.backgroundColor = color.cgColor
-        
-        
+        self.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
     }
     
     override init(layer: Any) {
@@ -77,11 +61,11 @@ open class BarLayer: CALayer {
         color = barLayer.color
         animationDuration = barLayer.animationDuration
         animationDelay = barLayer.animationDelay
-        barEntry = barLayer.barEntry
         width = barLayer.width
         boundsManaged = barLayer.boundsManaged
         cornerRounding = barLayer.cornerRounding
         disabledAnimation = barLayer.disabledAnimation
+        
     }
     
     required public init?(coder aDecoder: NSCoder) {
@@ -91,10 +75,13 @@ open class BarLayer: CALayer {
     //MARK: Functions
     open override func setNeedsLayout() {
         super.setNeedsLayout()
-        cornerRadius = cornerRounding
+        /// Set cornerRounding based on height
+        self.cornerRadius = min(self.bounds.height / 2, cornerRounding)
     }
     
-    // If boundsManaged we need to tell the system to animate the bar
+    /**
+     If boundsManaged change we need to tell the system to animate the bar
+     */
     open override class func needsDisplay(forKey key: String) -> Bool {
         if key == "boundsManaged" {
             return true
@@ -103,13 +90,15 @@ open class BarLayer: CALayer {
         return super.needsDisplay(forKey: key)
     }
     
-    // Returns the animation for the bar
+    /**
+     Returns the animation for the bar
+     */
     open override func action(forKey key: String) -> CAAction? {
         if disabledAnimation {
             return NSNull()
         }
         
-        // MARK: TODO: Use boundsManaged for animation: Somehow its nil.. and beginTime not working properly
+        // MARK: TODO: beginTime not working properly
         if key == "boundsManaged" {
             let animation = CABasicAnimation(keyPath: "bounds")
             if let bounds = oldLayer {
@@ -117,10 +106,11 @@ open class BarLayer: CALayer {
             } else {
                 animation.fromValue = CGRect(x: self.bounds.maxX, y: self.bounds.height - 0, width: width, height: 0)
             }
+            
             animation.toValue = self.bounds
             
             animation.duration = animationDuration
-            //animation.beginTime = CACurrentMediaTime() + animationDelay
+            animation.beginTime = CACurrentMediaTime() + animationDelay
             animation.delegate = self
             
             return animation
@@ -128,9 +118,12 @@ open class BarLayer: CALayer {
         
         return super.action(forKey: key)
     }
-    
+    /// previous layer to animate from
     var oldLayer: CALayer?
-    // Presents the bar based on the representation/animation
+    
+    /**
+     Presents the bar based on the representation/animation
+     */
     public func present(animated: Bool, oldLayer: CALayer?) {
         self.oldLayer = oldLayer
         let bounds = CGRect(x: self.bounds.maxX, y: self.bounds.height - 0, width: width, height: 0)
@@ -144,30 +137,39 @@ open class BarLayer: CALayer {
         }
     }
     
-    // Disbaled temporarily the animation
+    /**
+     Returns nil to disable interactions. Interactions should only happen through the parent
+     */
+    open override func hitTest(_ p: CGPoint) -> CALayer? {
+        return nil
+    }
+    
+    
+    /**
+     Disbaled temporarily the animation
+     */
     private func withDisabledAnimation(f: () -> Void) {
         disabledAnimation = true
         f()
         disabledAnimation = false
     }
     
-    // Behavior for when the bar is selected
+    /**
+     Behavior for when the bar is selected
+     */
     open func animateSelected(selected: Bool) {
-        backgroundColor = selected ? self.color.withAlphaComponent(0.5).cgColor : self.color.cgColor
+        self.backgroundColor = selected ? self.color.withAlphaComponent(0.5).cgColor : self.color.cgColor
     }
-    
 }
 
 
 //MARK: CAAnimationDelegate
 extension BarLayer: CAAnimationDelegate {
     public func animationDidStart(_ anim: CAAnimation) {
-        guard let entry = barEntry else {return}
-        barLayerDelegate?.animationDidStart(bar: Bar(layer: self, data: entry))
+        barLayerDelegate?.animationDidStart()
     }
     
     public func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
-        guard let entry = barEntry else {return}
-        barLayerDelegate?.animationDidStop(bar: Bar(layer: self, data: entry))
+        barLayerDelegate?.animationDidStop()
     }
 }
