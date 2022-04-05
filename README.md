@@ -1,6 +1,6 @@
 
 <div>
-<img align="right" width="50" height="50" src="./SimpleChartsDemo/SupportFiles/Preview/appIcon.png" alt="project app icon">
+<img align="right" width="50" height="50" src="./SimpleChartsDemo/SupportFiles/Preview/appicon.png" alt="project app icon">
 
 ## SimpleCharts
 </div>
