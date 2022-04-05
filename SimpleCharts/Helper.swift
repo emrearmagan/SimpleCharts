@@ -6,3 +6,9 @@
 //
 
 import UIKit
+
+struct BaseConstraints {
+    static var TitleConstraints: [Int] {
+        return [1]
+    }
+}

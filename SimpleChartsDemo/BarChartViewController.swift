@@ -27,22 +27,23 @@ class BarChartViewController: UIViewController {
             BarEntryModel(value: 8, color: UIColor.init(red: 29/255, green: 185/255, blue: 84/255, alpha: 1), label: "Spotify"),
             BarEntryModel(value: 15, color: UIColor.init(red: 53/255, green: 70/255, blue: 92/255, alpha: 1), label: "Tumblr")
         ]
-        
         barChartView.backgroundColor = .white
         barChartView.layer.cornerRadius = 10
         barChartView.entries = defaultEntries
-        
+
         //barChartViewSmall.showLegendary = false
+        barChartViewSmall.titleView = TitleView()
+        barChartViewSmall.titleView?.text = "Small"
+        barChartViewSmall.titleView?.font = UIFont(name: "HelveticaNeue-Bold", size: 18.0)!
         barChartViewSmall.backgroundColor = .white
-        barChartViewSmall.showLegendary = false
         barChartViewSmall.layer.cornerRadius = 10
         barChartViewSmall.entries = defaultEntries
-        
+        /*
         barChartViewLong.backgroundColor = .white
-        barChartViewLong.showLegendary = false
+        //barChartViewLong.showLegendary = false
         barChartViewLong.layer.cornerRadius = 10
         barChartViewLong.entries = defaultEntries
-        
+        */
         
         let _ = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [self] timer in
             var entries = [BarEntryModel]()
@@ -52,12 +53,31 @@ class BarChartViewController: UIViewController {
                 entries.append(BarEntryModel(value: value, color: entry.color, label: entry.label))
             }
             
-            entries.append(self.defaultEntries[Int.random(in: 0...5)])
             self.barChartViewSmall.updateEntries(entries: entries, animationDuration: 0.5)
+        }
+         
+        //barChartView.titleView = TitleView(text: "Large", font: UIFont(name: "HelveticaNeue-Bold", size: 20.0)!)
+        let _ = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { [self] timer in
+            count += 1
+            if count == 1 {
+            barChartView.titleView = TitleView(text: "Large", font: UIFont(name: "HelveticaNeue-Bold", size: 20.0)!)
+            }
+            if count == 2 {
+                barChartView.titleView = nil
+            }
+            
+            //barChartView.titleView?.font = UIFont(name: "HelveticaNeue-Bold", size: (barChartView.titleView?.font.pointSize)! + CGFloat(count))!
+            
+            /*
+            if count % 2 == 0 {
+                barChartView.titleView = TitleView(text: "Large", font: UIFont(name: "HelveticaNeue-Bold", size: 20.0)!)
+            }else {
+                barChartView.titleView = nil
+            }*/
         }
     }
     
-
+    var count = 0
     @IBAction func segmetSelected(_ sender: UISegmentedControl) {
         let numSegments = (sender.selectedSegmentIndex + 1) * 4
         

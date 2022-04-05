@@ -133,7 +133,8 @@ class LegendLayer: CALayer {
     
     override func layoutIfNeeded() {
         let height = CGFloat(CGFloat(totalNumberOfRows) * rowSpacing + rowSpacing)
-        self.frame = CGRect(x: 0, y: (superlayer?.bounds.height)! - height, width: (superlayer?.bounds.width)!, height: height)
+        self.frame = CGRect(x: 0, y: height, width: (superlayer?.bounds.width)!, height: height)
+        
         super.layoutIfNeeded()
     }
     

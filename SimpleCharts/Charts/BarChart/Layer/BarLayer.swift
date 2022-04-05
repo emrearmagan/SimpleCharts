@@ -19,6 +19,7 @@ public protocol BarLayerDelegate: AnyObject {
 
 open class BarLayer: CALayer {
     //MARK: Public Properties
+    
     /// Animates the bar if selected
     public var selected: Bool = false {
         didSet {

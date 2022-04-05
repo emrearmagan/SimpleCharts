@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="eqr-L9-bCs">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19158" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="eqr-L9-bCs">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19141"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -73,22 +73,21 @@
                             </segmentedControl>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h7X-CB-Rd6" customClass="BarChartView" customModule="SimpleCharts">
                                 <rect key="frame" x="20" y="140" width="374" height="250"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" systemColor="systemBlueColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="250" id="8C7-Bc-2z3"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kVd-8j-pFN" customClass="BarChartView" customModule="SimpleCharts">
-                                <rect key="frame" x="132" y="491" width="150" height="150"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <rect key="frame" x="103.5" y="491" width="207" height="200"/>
+                                <color key="backgroundColor" systemColor="systemBlueColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="150" id="jAf-eL-sAs"/>
-                                    <constraint firstAttribute="width" constant="150" id="ucm-1w-rWE"/>
+                                    <constraint firstAttribute="height" constant="200" id="6mB-7V-Fnw"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wTS-vT-K8v" customClass="BarChartView" customModule="SimpleCharts">
-                                <rect key="frame" x="50" y="691" width="314" height="130"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wTS-vT-K8v">
+                                <rect key="frame" x="50" y="741" width="314" height="130"/>
+                                <color key="backgroundColor" systemColor="systemBlueColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="130" id="cpT-9n-ND8"/>
                                 </constraints>
@@ -105,6 +104,7 @@
                             <constraint firstItem="h7X-CB-Rd6" firstAttribute="top" secondItem="xTS-Zb-Jl7" secondAttribute="top" id="RBL-Og-ww5"/>
                             <constraint firstItem="xTS-Zb-Jl7" firstAttribute="trailing" secondItem="h7X-CB-Rd6" secondAttribute="trailing" constant="20" id="Y15-CV-yzY"/>
                             <constraint firstItem="b40-au-35T" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="xTS-Zb-Jl7" secondAttribute="leading" constant="50" id="eZk-TT-ncO"/>
+                            <constraint firstItem="kVd-8j-pFN" firstAttribute="width" secondItem="XBL-OJ-UCE" secondAttribute="width" multiplier="0.5" id="gHm-FQ-BRq"/>
                             <constraint firstItem="xTS-Zb-Jl7" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="b40-au-35T" secondAttribute="trailing" constant="50" id="l7L-yI-zfx"/>
                             <constraint firstItem="h7X-CB-Rd6" firstAttribute="leading" secondItem="xTS-Zb-Jl7" secondAttribute="leading" constant="20" id="wGA-Z7-fch"/>
                             <constraint firstItem="b40-au-35T" firstAttribute="centerX" secondItem="h7X-CB-Rd6" secondAttribute="centerX" id="wYL-Al-JlR"/>
@@ -114,7 +114,7 @@
                     <navigationItem key="navigationItem" title="BarChart" largeTitleDisplayMode="always" id="Nj2-d7-aTw"/>
                     <connections>
                         <outlet property="barChartView" destination="h7X-CB-Rd6" id="2A2-he-qdl"/>
-                        <outlet property="barChartViewLong" destination="wTS-vT-K8v" id="Ysa-md-Xm6"/>
+                        <outlet property="barChartViewLong" destination="wTS-vT-K8v" id="GnB-Bx-PcZ"/>
                         <outlet property="barChartViewSmall" destination="kVd-8j-pFN" id="kHz-bG-Nmn"/>
                         <outlet property="segment" destination="b40-au-35T" id="oVu-ll-aYN"/>
                     </connections>
@@ -145,6 +145,9 @@
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

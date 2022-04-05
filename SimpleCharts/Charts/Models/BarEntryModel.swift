@@ -8,10 +8,18 @@
 import Foundation
 import UIKit
 
-public class BarEntryModel: Comparable {
-    public var value: Double
+public class BaseEntryModel {
     public let color: UIColor
     public let label: String
+    
+    public init(color: UIColor, label: String) {
+        self.color = color
+        self.label = label
+    }
+}
+
+public class BarEntryModel: BaseEntryModel, Comparable {
+    public var value: Double
     
     public static func <(lhs: BarEntryModel, rhs: BarEntryModel) -> Bool {
         return lhs.value < rhs.value
@@ -22,7 +30,6 @@ public class BarEntryModel: Comparable {
     
     public init(value: Double, color: UIColor, label: String) {
         self.value = value
-        self.color = color
-        self.label = label
+        super.init(color: color, label: label)
     }
 }
