@@ -237,7 +237,7 @@ dependencies: [
 ]
 ```
 
-##### Installing SwiftChart manually <a name="manually"></a>
+##### Installing SimpleCharts manually <a name="manually"></a>
 1. Download SimpleCharts.zip from the last release and extract its content in your project's folder.
 2. From the Xcode project, choose Add Files to ... from the File menu and add the extracted files.
 
