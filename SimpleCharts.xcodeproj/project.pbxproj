@@ -258,13 +258,6 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		D0AD75FA27FC7DC200A1AF0E /* Utils */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Utils;
-			sourceTree = "<group>";
-		};
 		D0AD75FE27FC8F9300A1AF0E /* Extension */ = {
 			isa = PBXGroup;
 			children = (
@@ -300,7 +293,6 @@
 			children = (
 				D0AD75A627FC7A1200A1AF0E /* Charts */,
 				D0F9949326649CD600890554 /* Extension */,
-				D0AD75FA27FC7DC200A1AF0E /* Utils */,
 				D0F9949D26677FD600890554 /* SupportFiles */,
 			);
 			path = SimpleCharts;
