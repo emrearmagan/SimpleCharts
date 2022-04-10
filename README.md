@@ -29,7 +29,7 @@ A simple charting library for iOS.
 - 🖖 Touch events
 - ✨ Bar charts are fully customizable and animated
 
---- 
+---
 ### 💻 Table of contents
   1. [Quick Start](#quickStart)
       1. [Bar chart](#barChart)
@@ -226,16 +226,12 @@ Group Chart:
 |-------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `groupSpacing`          | Spacing between each group (`CGFloat`, default `10`) |
 
-### Getting started <a name="gettingStarted"></a>
+### Installation <a name="gettingStarted"></a>
 
-##### Swift Package Manager Install <a name="packageManager"></a>
-Swift Package Manager
+##### CocoaPods
+You can use CocoaPods to install SimpleCharts by adding it to your Podfile:
 
-```swift
-dependencies: [
-    .package(url: "https://github.com/emrearmagan/SimpleCharts.git")
-]
-```
+    pod 'SYBanner'
 
 ##### Installing SimpleCharts manually <a name="manually"></a>
 1. Download SimpleCharts.zip from the last release and extract its content in your project's folder.
