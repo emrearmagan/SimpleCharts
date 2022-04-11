@@ -2,7 +2,7 @@
 //  SimpleCharts.h
 //  SimpleCharts
 //
-//  Created by Emre Armagan on 28.05.21.
+//  Created by Emre Armagan on 11.04.22.
 //
 
 #import <Foundation/Foundation.h>
