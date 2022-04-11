@@ -231,7 +231,7 @@ Group Chart:
 ##### CocoaPods
 You can use CocoaPods to install SimpleCharts by adding it to your Podfile:
 
-    pod 'SYBanner'
+    pod 'SimpleCharts'
 
 ##### Installing SimpleCharts manually <a name="manually"></a>
 1. Download SimpleCharts.zip from the last release and extract its content in your project's folder.
