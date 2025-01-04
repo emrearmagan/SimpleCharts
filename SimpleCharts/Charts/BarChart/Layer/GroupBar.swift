@@ -11,16 +11,16 @@ import Foundation
 public struct GroupBar {
     public internal(set) var groupId: Int
     public internal(set) var bar: Bar
-    
+
     public init(id: Int, bar: Bar) {
-        self.groupId = id
+        groupId = id
         self.bar = bar
     }
-    
+
     public func hash(into hasher: inout Hasher) {
         return hasher.combine(groupId)
     }
-    
+
     public static func == (lhs: GroupBar, rhs: GroupBar) -> Bool {
         return lhs.groupId == rhs.groupId && lhs.bar.data.id == rhs.bar.data.id
     }

@@ -11,16 +11,16 @@ import Foundation
 public struct Bar: Hashable {
     public internal(set) var container: BarContainer
     public internal(set) var data: BarContainerData
-    
+
     public init(container: BarContainer, data: BarContainerData) {
         self.container = container
         self.data = data
     }
-    
+
     public func hash(into hasher: inout Hasher) {
         return hasher.combine(data.id)
     }
-    
+
     public static func == (lhs: Bar, rhs: Bar) -> Bool {
         return lhs.data.id == rhs.data.id
     }

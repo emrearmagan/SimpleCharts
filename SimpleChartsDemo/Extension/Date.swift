@@ -12,15 +12,15 @@ extension Date {
         let formatter = DateFormatter()
         formatter.dateFormat = "MMM"
         formatter.timeZone = TimeZone.current
-        
+
         return formatter.string(from: self)
     }
-    
+
     func shortedWeekday() -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "EEEEE"
         formatter.timeZone = TimeZone.current
-        
+
         return formatter.string(from: self)
     }
 }

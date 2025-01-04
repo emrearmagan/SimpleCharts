@@ -14,14 +14,14 @@ extension String {
         let size = self.size(withAttributes: fontAttributes)
         return size.width
     }
-    
+
     /// Returns the height of the String
     func heightOfString(usingFont font: UIFont) -> CGFloat {
         let fontAttributes = [NSAttributedString.Key.font: font]
         let size = self.size(withAttributes: fontAttributes)
         return size.height
     }
-    
+
     /// Returns the size of the String
     func sizeOfString(usingFont font: UIFont) -> CGSize {
         let fontAttributes = [NSAttributedString.Key.font: font]

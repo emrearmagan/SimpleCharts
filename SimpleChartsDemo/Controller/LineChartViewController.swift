@@ -5,13 +5,12 @@
 //  Created by Emre Armagan on 05.04.22.
 //
 
-import UIKit
 import SimpleCharts
+import UIKit
 
 class LineChartViewController: UIViewController {
+    @IBOutlet var lineChartView: LineChartView!
 
-    @IBOutlet weak var lineChartView: LineChartView!
-    
     private let entries: [LineChartEntryModel] = [
         LineChartEntryModel(value: 105, date: Calendar.current.date(byAdding: .month, value: -6, to: Date())!),
         LineChartEntryModel(value: 88, date: Calendar.current.date(byAdding: .month, value: -5, to: Date())!),
